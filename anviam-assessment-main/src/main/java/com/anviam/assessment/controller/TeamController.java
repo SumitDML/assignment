@@ -1,7 +1,6 @@
 package com.anviam.assessment.controller;
 
 import com.anviam.assessment.exception.ConstraintViolationException;
-import com.anviam.assessment.model.request.CreateAgentRequest;
 import com.anviam.assessment.model.request.CreateTeamRequest;
 import com.anviam.assessment.model.response.ResponseModel;
 import com.anviam.assessment.model.response.UIBean;
@@ -18,9 +17,12 @@ import javax.validation.ValidationException;
 public class TeamController {
     @Autowired
     TeamService teamService;
-    @PostMapping("/team/createTeam")
-    public ResponseEntity createNewAgent(@Valid @RequestBody CreateTeamRequest createTeamRequest){
+
+
+    @PostMapping("/team/create")
+    public ResponseEntity createNewTeam(@Valid @RequestBody CreateTeamRequest createTeamRequest){
         try{
+
             UIBean returnValue = teamService.createNewTeam(createTeamRequest);
             ResponseModel responseModel = new ResponseModel(HttpStatus.OK,"Team Created Successfully!",null,returnValue);
             return new ResponseEntity(responseModel,HttpStatus.OK);
@@ -36,7 +38,7 @@ public class TeamController {
         return new ResponseEntity<>(returnValue,HttpStatus.OK);
     }
 
-    @GetMapping("/team/findAll")
+    @GetMapping("/team/")
     public ResponseEntity findAllTeam( @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
                                          @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize)
     {

@@ -23,7 +23,7 @@ public class ManagerController {
     @Autowired
     ManagerService managerService;
 
-    @PostMapping("/manager/createManager")
+    @PostMapping("/manager/create")
     public ResponseEntity createNewManager(@Valid @RequestBody CreateManagerRequest createManagerRequest){
         try{
             UIBean returnValue = managerService.createNewManager(createManagerRequest);

@@ -1,21 +1,16 @@
 package com.anviam.assessment.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Getter
-@Setter
 
-@NoArgsConstructor
+
+@Entity
 public class Manager {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "manager_fname")
     private String firstName;
@@ -25,7 +20,9 @@ public class Manager {
     private String idNumber;
     @Column(name = "email",unique = true)
     private String email;
-    @OneToOne(cascade = CascadeType.MERGE)
+
+
+    @OneToOne(cascade = CascadeType.MERGE,mappedBy = "reportingManager")
     private Agent agent;
 
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -98,5 +95,8 @@ public class Manager {
         this.email = email;
         this.agent = agent;
         this.managedTeams = managedTeams;
+    }
+
+    public Manager() {
     }
 }

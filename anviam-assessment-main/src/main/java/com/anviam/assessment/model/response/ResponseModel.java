@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResponseModel<T> implements Serializable{
+public class ResponseModel<T> {
 
     private final Integer status;
     private final String message;

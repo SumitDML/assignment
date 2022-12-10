@@ -19,7 +19,7 @@ public class CreateAgentRequest {
     @Email
     @NotNull(message = "Email name cannot be null")
     private String email;
-    @NotBlank(message = "managerId cannot be null")
+    @NotNull(message = "Manager ID cannot be null")
     private Long managerId;
 
  public String getFirstName() {

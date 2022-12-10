@@ -1,30 +1,25 @@
 package com.anviam.assessment.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
 
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class Team {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "team_name",unique = true)
     private String name;
+
     @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "managedTeams")
     private Set<Manager> managers;
 
     @OneToMany(mappedBy = "team")
-    private List<Agent> agents;
+    private Set<Agent> agents;
 
     public Long getId() {
         return id;
@@ -50,18 +45,22 @@ public class Team {
         this.managers = managers;
     }
 
-    public List<Agent> getAgents() {
+
+    public Set<Agent> getAgents() {
         return agents;
     }
 
-    public void setAgents(List<Agent> agents) {
+    public void setAgents(Set<Agent> agents) {
         this.agents = agents;
     }
 
-    public Team(Long id, String name, Set<Manager> managers, List<Agent> agents) {
+    public Team(Long id, String name, Set<Manager> managers, Set<Agent> agents) {
         this.id = id;
         this.name = name;
         this.managers = managers;
         this.agents = agents;
+    }
+
+    public Team() {
     }
 }

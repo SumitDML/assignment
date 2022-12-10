@@ -1,20 +1,15 @@
 package com.anviam.assessment.entity;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 
-
-@Getter
-@Setter
-
-@NoArgsConstructor
+@Entity
 public class Agent {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "email",unique = true)
     private String email;
@@ -26,12 +21,16 @@ public class Agent {
     private String idNumber;
 
     @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name = "agent_manager_id")
+    @JoinColumn(name = "manager_id")
     private Manager reportingManager;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
+
+    public Agent() {
+
+    }
 
     public Long getId() {
         return id;

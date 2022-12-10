@@ -1,10 +1,15 @@
 package com.anviam.assessment.model.request;
 
+import com.anviam.assessment.entity.Team;
+import com.anviam.assessment.model.TeamDTO;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 
 public class CreateManagerRequest {
@@ -15,6 +20,9 @@ public class CreateManagerRequest {
     @Email
     @NotBlank(message = "Email name cannot be null")
     private String email;
+
+    @NotNull(message = "Cannot be null")
+    private Set<TeamDTO> managedTeams;
 
     public String getFirstName() {
         return firstName;
@@ -40,9 +48,21 @@ public class CreateManagerRequest {
         this.email = email;
     }
 
-    public CreateManagerRequest(String firstName, String lastName, String email) {
+    public CreateManagerRequest(String firstName, String lastName, String email, Set<TeamDTO> managedTeams) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.managedTeams = managedTeams;
+    }
+
+    public Set<TeamDTO> getManagedTeams() {
+        return managedTeams;
+    }
+
+    public void setManagedTeams(Set<TeamDTO> managedTeams) {
+        this.managedTeams = managedTeams;
+    }
+
+    public CreateManagerRequest() {
     }
 }

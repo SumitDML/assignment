@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 
-public class UIBean<T> implements Serializable {
+public class UIBean<T> {
     private T data;
 
     public UIBean(T data) {

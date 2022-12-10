@@ -18,7 +18,7 @@ import javax.validation.ValidationException;
 public class AgentController {
     @Autowired
     AgentService agentService;
-    @PostMapping("/agent/createAgent")
+    @PostMapping("/agent/create")
     public ResponseEntity createNewAgent(@Valid @RequestBody CreateAgentRequest createAgentRequest){
         try{
             UIBean returnValue = agentService.createNewAgent(createAgentRequest);
@@ -36,7 +36,7 @@ public class AgentController {
         return new ResponseEntity<>(returnValue,HttpStatus.OK);
     }
 
-    @GetMapping("/agents/findAll")
+    @GetMapping("/agent/")
     public ResponseEntity findAllAgents( @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
                                          @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize)
     {
